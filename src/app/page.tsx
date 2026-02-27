@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "motion/react";
 import { Header } from "@/components/Header/Header";
 import { BackgroundSpheres } from "@/components/BackgroundSpheres/BackgroundSpheres";
 
@@ -13,37 +16,94 @@ const heroDescriptionClass =
 const heroButtonClass =
   "hero-gradient-border-button inline-flex h-[clamp(3rem,4.4vw,4rem)] w-[clamp(8.5rem,11.2vw,10.25rem)] items-center justify-center rounded-[100px] border-2 border-transparent bg-black px-[clamp(1.25rem,2.2vw,1.75rem)] text-[clamp(0.82rem,1vw,0.95rem)] font-medium leading-none tracking-[0.02em] text-white transition-colors duration-200 hover:text-white";
 
+const revealEase = [0.22, 1, 0.36, 1] as const;
+
+const heroContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.18,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const heroItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 26,
+    filter: "blur(9px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.72,
+      ease: revealEase,
+    },
+  },
+};
 
 export default function Home() {
   return (
     <div className="relative flex min-h-screen flex-col overflow-hidden bg-black text-white">
       <Header />
       <main className="relative flex flex-1 items-start justify-center px-4">
-        <section className="relative z-10 flex w-full max-w-[1280px] flex-col items-center px-[clamp(0.75rem,2.2vw,2rem)] pt-[clamp(5.8rem,15.5vh,11rem)] text-center">
-          <h1 className={heroTitleClass}>
+        <motion.section
+          className="relative z-10 flex w-full max-w-[1280px] flex-col items-center px-[clamp(0.75rem,2.2vw,2rem)] pt-[clamp(5.8rem,15.5vh,11rem)] text-center"
+          initial="hidden"
+          animate="visible"
+          variants={heroContainerVariants}
+        >
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-[23%] -z-10 h-[clamp(12rem,22vw,19rem)] w-[clamp(20rem,58vw,56rem)] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(141,127,255,0.24)_0%,rgba(141,127,255,0)_72%)] blur-2xl"
+            initial={{ opacity: 0, scale: 0.84 }}
+            animate={{ opacity: 1, scale: [1, 1.04, 1] }}
+            transition={{
+              opacity: { duration: 0.85, delay: 0.28, ease: revealEase },
+              scale: {
+                duration: 8.5,
+                delay: 0.86,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
+          />
+          <motion.h1 className={heroTitleClass} variants={heroItemVariants}>
             THE BEST WEBSITE EVER
-          </h1>
-          <h3 className={heroSubtitleClass}>
+          </motion.h1>
+          <motion.h3 className={heroSubtitleClass} variants={heroItemVariants}>
             Scalable.
-          </h3>
-          <p className={heroDescriptionClass}>
+          </motion.h3>
+          <motion.p className={heroDescriptionClass} variants={heroItemVariants}>
             Our technology performing fast blockchain (120K TPS) and it has
             guaranteed AI-based data security. Proof of Stake, its consensus
             algorithm enables unlimited speeds.
-          </p>
-          <div className="mt-[clamp(1.3rem,3vw,2.2rem)] flex flex-col items-center gap-[clamp(0.5rem,1vw,0.7rem)] min-[480px]:flex-row">
-            <button
+          </motion.p>
+          <motion.div
+            className="mt-[clamp(1.3rem,3vw,2.2rem)] flex flex-col items-center gap-[clamp(0.5rem,1vw,0.7rem)] min-[480px]:flex-row"
+            variants={heroItemVariants}
+          >
+            <motion.button
               type="button"
               className={`${heroButtonClass} hero-gradient-border-button--active`}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Get Started
-            </button>
-            <button type="button" className={heroButtonClass}>
+            </motion.button>
+            <motion.button
+              type="button"
+              className={heroButtonClass}
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
               Read more
-            </button>
-          </div>
-        </section>
-
+            </motion.button>
+          </motion.div>
+        </motion.section>
 
         <BackgroundSpheres />
       </main>

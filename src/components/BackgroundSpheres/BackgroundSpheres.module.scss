@@ -48,6 +48,18 @@
   }
 }
 
+.mainImageLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  will-change: transform, opacity, filter;
+}
+
+.mainImageFloat {
+  position: absolute;
+  inset: 0;
+}
+
 .mainImage {
   --main-image-width: 114.67rem;
   position: absolute;
@@ -80,6 +92,24 @@
 .sphere {
   position: absolute;
   transform: translate(-50%, -50%);
+  will-change: transform, opacity;
+}
+
+.sphereGraphic {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sphereDrift {
+  width: 100%;
+  height: 100%;
+}
+
+.sphereLift {
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity, filter;
 }
 
 .left {

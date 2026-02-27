@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "motion/react";
 import {
   BurgerMenuIcon,
   DiscordIcon,
@@ -33,58 +34,113 @@ const desktopNavListClass =
 const socialIconClass =
   "h-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)] w-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)]";
 
+const revealEase = [0.22, 1, 0.36, 1] as const;
+const headerRevealDelay = 1.35;
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="relative z-30 w-full">
       <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-2 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-0 min-[769px]:pt-[2.65rem] lg:max-w-[1420px] lg:px-10 xl:max-w-[1500px] xl:px-12">
-        <a href="#" className={desktopBrandClass}>
+        <motion.a
+          href="#"
+          className={desktopBrandClass}
+          initial={{ opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: headerRevealDelay + 0.05, ease: revealEase }}
+        >
           SITE NAME
-        </a>
+        </motion.a>
 
-        <nav aria-label="Primary navigation" className="hidden min-[769px]:block">
-          <ul className={desktopNavListClass}>
+        <motion.nav
+          aria-label="Primary navigation"
+          className="hidden min-[769px]:block"
+          initial={{ opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: headerRevealDelay + 0.18, ease: revealEase }}
+        >
+          <motion.ul
+            className={desktopNavListClass}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  delayChildren: headerRevealDelay + 0.24,
+                  staggerChildren: 0.06,
+                },
+              },
+            }}
+          >
             {navItems.map((item) => (
-              <li key={item}>
+              <motion.li
+                key={item}
+                variants={{
+                  hidden: { opacity: 0, y: -8 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.3, ease: revealEase },
+                  },
+                }}
+              >
                 <a
                   href="#"
                   className="transition-colors duration-200 hover:text-white"
                 >
                   {item}
                 </a>
-              </li>
+              </motion.li>
             ))}
-          </ul>
-        </nav>
+          </motion.ul>
+        </motion.nav>
 
-        <div className="flex items-center justify-self-end gap-[clamp(0.5rem,0.4rem+0.35vw,0.95rem)]">
-          {socialLinks.map(({ label, href, Icon }) => (
-            <a
+        <motion.div
+          className="flex items-center justify-self-end gap-[clamp(0.5rem,0.4rem+0.35vw,0.95rem)]"
+          initial={{ opacity: 0, y: -14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: headerRevealDelay + 0.31, ease: revealEase }}
+        >
+          {socialLinks.map(({ label, href, Icon }, index) => (
+            <motion.a
               key={label}
               href={href}
               aria-label={label}
               className="text-white/85 transition-colors duration-200 hover:text-white"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: headerRevealDelay + 0.42 + index * 0.05,
+                ease: revealEase,
+              }}
+              whileHover={{ y: -1.5, scale: 1.04 }}
             >
               <Icon className={socialIconClass} />
-            </a>
+            </motion.a>
           ))}
 
-          <button
+          <motion.button
             type="button"
             aria-controls="mobile-navigation"
             aria-expanded={isMenuOpen}
             aria-label="Toggle navigation"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="grid h-7 w-7 place-items-center text-white/90 transition-colors duration-200 hover:text-white min-[769px]:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: headerRevealDelay + 0.64, ease: revealEase }}
+            whileTap={{ scale: 0.9 }}
           >
             <BurgerMenuIcon
               className={`h-5 w-5 transition-transform duration-200 ${
                 isMenuOpen ? "rotate-90" : ""
               }`}
             />
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
 
       <nav

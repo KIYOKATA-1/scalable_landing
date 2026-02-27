@@ -1,9 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
 import styles from "./BackgroundSpheres.module.scss";
 
 type SphereProps = {
   className?: string;
 };
+
+const revealEase = [0.22, 1, 0.36, 1] as const;
+const sceneRevealDelay = 1.35;
+const mistRiseDuration = 1.05;
+const driftStartDelay = sceneRevealDelay + mistRiseDuration + 0.2;
 
 function SphereCenter({ className }: SphereProps) {
   return (
@@ -112,20 +120,199 @@ function SphereRight({ className }: SphereProps) {
 
 export function BackgroundSpheres() {
   return (
-    <div aria-hidden="true" className={styles.visualBlock}>
+    <motion.div
+      aria-hidden="true"
+      className={styles.visualBlock}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: sceneRevealDelay, ease: revealEase }}
+    >
       <div className={styles.backgroundSpheres}>
-        <SphereLeft className={`${styles.sphere} ${styles.left}`} />
-        <SphereCenter className={`${styles.sphere} ${styles.center}`} />
-        <SphereRight className={`${styles.sphere} ${styles.right}`} />
+        <motion.div
+          className={`${styles.sphere} ${styles.left}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.9 }}
+          transition={{
+            opacity: { duration: 0.7, delay: sceneRevealDelay, ease: revealEase },
+          }}
+        >
+          <motion.div
+            className={styles.sphereLift}
+            initial={{ y: 150, filter: "blur(28px)" }}
+            animate={{ y: 0, filter: "blur(0px)" }}
+            transition={{
+              duration: mistRiseDuration,
+              delay: sceneRevealDelay,
+              ease: revealEase,
+            }}
+          >
+            <motion.div
+              className={styles.sphereDrift}
+              animate={{
+                x: [0, -16, 8, 0],
+                y: [0, -14, 9, 0],
+                scale: [1, 1.05, 0.98, 1],
+              }}
+              transition={{
+                x: {
+                  duration: 15,
+                  delay: driftStartDelay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                y: {
+                  duration: 17,
+                  delay: driftStartDelay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                scale: {
+                  duration: 13,
+                  delay: driftStartDelay,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <SphereLeft className={styles.sphereGraphic} />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className={`${styles.sphere} ${styles.center}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.95 }}
+          transition={{
+            opacity: { duration: 0.7, delay: sceneRevealDelay + 0.08, ease: revealEase },
+          }}
+        >
+          <motion.div
+            className={styles.sphereLift}
+            initial={{ y: 140, filter: "blur(26px)" }}
+            animate={{ y: 0, filter: "blur(0px)" }}
+            transition={{
+              duration: mistRiseDuration,
+              delay: sceneRevealDelay + 0.08,
+              ease: revealEase,
+            }}
+          >
+            <motion.div
+              className={styles.sphereDrift}
+              animate={{
+                x: [0, 12, -10, 0],
+                y: [0, -12, 7, 0],
+                scale: [1, 1.03, 0.99, 1],
+              }}
+              transition={{
+                x: {
+                  duration: 14,
+                  delay: driftStartDelay + 0.08,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                y: {
+                  duration: 16,
+                  delay: driftStartDelay + 0.08,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                scale: {
+                  duration: 12,
+                  delay: driftStartDelay + 0.08,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <SphereCenter className={styles.sphereGraphic} />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className={`${styles.sphere} ${styles.right}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.9 }}
+          transition={{
+            opacity: { duration: 0.7, delay: sceneRevealDelay + 0.16, ease: revealEase },
+          }}
+        >
+          <motion.div
+            className={styles.sphereLift}
+            initial={{ y: 150, filter: "blur(28px)" }}
+            animate={{ y: 0, filter: "blur(0px)" }}
+            transition={{
+              duration: mistRiseDuration,
+              delay: sceneRevealDelay + 0.16,
+              ease: revealEase,
+            }}
+          >
+            <motion.div
+              className={styles.sphereDrift}
+              animate={{
+                x: [0, 14, -9, 0],
+                y: [0, -15, 8, 0],
+                scale: [1, 1.04, 0.98, 1],
+              }}
+              transition={{
+                x: {
+                  duration: 16,
+                  delay: driftStartDelay + 0.16,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                y: {
+                  duration: 18,
+                  delay: driftStartDelay + 0.16,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                scale: {
+                  duration: 14,
+                  delay: driftStartDelay + 0.16,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            >
+              <SphereRight className={styles.sphereGraphic} />
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
-      <Image
-        className={styles.mainImage}
-        src="/images/main.webp"
-        alt=""
-        width={1605}
-        height={505}
-        priority
-      />
-    </div>
+      <motion.div
+        className={styles.mainImageLayer}
+        initial={{ opacity: 0, y: 180, filter: "blur(34px)" }}
+        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{
+          duration: mistRiseDuration + 0.15,
+          delay: sceneRevealDelay + 0.26,
+          ease: revealEase,
+        }}
+      >
+        <motion.div
+          className={styles.mainImageFloat}
+          animate={{
+            y: [0, -12, 0, 7, 0],
+            rotate: [0, 0.35, 0, -0.35, 0],
+            scale: [1, 1.01, 1, 0.995, 1],
+          }}
+          transition={{
+            duration: 13,
+            delay: driftStartDelay + 0.38,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Image
+            className={styles.mainImage}
+            src="/images/main.webp"
+            alt=""
+            width={1605}
+            height={505}
+            priority
+          />
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
