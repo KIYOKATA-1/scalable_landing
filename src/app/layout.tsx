@@ -9,8 +9,33 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Scalable",
-  description: "Scalable landing page",
+  metadataBase: new URL("https://serendale.ai"),
+  title: "Serendale AI - AI Based Blockchain Platform",
+  description:
+    "Serendale AI helps teams ship secure, scalable AI products with realtime performance and production-ready infrastructure.",
+  openGraph: {
+    title: "Serendale AI - AI Based Blockchain Platform",
+    description:
+      "Secure and scalable AI product infrastructure with realtime performance.",
+    type: "website",
+    siteName: "Serendale AI",
+    url: "/",
+    images: [
+      {
+        url: "/images/main.webp",
+        width: 1605,
+        height: 505,
+        alt: "Serendale AI hero visual",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Serendale AI - AI Based Blockchain Platform",
+    description:
+      "Secure and scalable AI product infrastructure with realtime performance.",
+    images: ["/images/main.webp"],
+  },
 };
 
 export default function RootLayout({

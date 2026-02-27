@@ -9,7 +9,7 @@ type SphereProps = {
 };
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
-const sceneRevealDelay = 1.35;
+const sceneRevealDelay = 1.15;
 const mistRiseDuration = 1.05;
 const driftStartDelay = sceneRevealDelay + mistRiseDuration + 0.2;
 

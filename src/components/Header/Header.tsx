@@ -11,11 +11,10 @@ import {
 } from "@/shared/ui/icons";
 
 const navItems = [
-  "Smart Contracts",
-  "Services",
-  "Solutions",
-  "Roadmap",
-  "Whitepaper",
+  { label: "Home", href: "#hero" },
+  { label: "Advantages", href: "#advantages" },
+  { label: "Reviews", href: "#reviews" },
+  { label: "Contact", href: "#site-footer" },
 ];
 
 const socialLinks = [
@@ -35,7 +34,7 @@ const socialIconClass =
   "h-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)] w-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)]";
 
 const revealEase = [0.22, 1, 0.36, 1] as const;
-const headerRevealDelay = 1.35;
+const headerRevealDelay = 1.15;
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,7 +43,7 @@ export function Header() {
     <header className="relative z-30 w-full">
       <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-2 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-0 min-[769px]:pt-[2.65rem] lg:max-w-[1420px] lg:px-10 xl:max-w-[1500px] xl:px-12">
         <motion.a
-          href="#"
+          href="#hero"
           className={desktopBrandClass}
           initial={{ opacity: 0, y: -14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,7 +75,7 @@ export function Header() {
           >
             {navItems.map((item) => (
               <motion.li
-                key={item}
+                key={item.label}
                 variants={{
                   hidden: { opacity: 0, y: -8 },
                   visible: {
@@ -87,10 +86,10 @@ export function Header() {
                 }}
               >
                 <a
-                  href="#"
+                  href={item.href}
                   className="transition-colors duration-200 hover:text-white"
                 >
-                  {item}
+                  {item.label}
                 </a>
               </motion.li>
             ))}
@@ -157,13 +156,16 @@ export function Header() {
         >
           <ul className="rounded-2xl border border-white/10 bg-black/95 px-4 py-3 text-sm font-medium text-white/85 backdrop-blur">
             {navItems.map((item) => (
-              <li key={item} className="border-b border-white/10 last:border-b-0">
+              <li
+                key={item.label}
+                className="border-b border-white/10 last:border-b-0"
+              >
                 <a
-                  href="#"
+                  href={item.href}
                   className="block py-3 transition-colors duration-200 hover:text-white"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item}
+                  {item.label}
                 </a>
               </li>
             ))}
