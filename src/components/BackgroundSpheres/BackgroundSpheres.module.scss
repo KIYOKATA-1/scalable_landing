@@ -11,7 +11,7 @@
   inset: 0;
   z-index: 0;
   overflow: visible;
-  --sphere-size-scale: 2;
+  --sphere-size-scale: 1.5;
 
   --sphere-left-x: 27%;
   --sphere-center-x: 50%;
@@ -61,9 +61,9 @@
 }
 
 .mainImage {
-  --main-image-width: 114.67rem;
+  --main-image-width: 172rem;
   position: absolute;
-  left: 51%;
+  left: 52%;
   bottom: -0.8rem;
   z-index: 1;
   width: var(--main-image-width);
@@ -71,15 +71,15 @@
   transform: translateX(-50%);
 
   @media (max-width: 1200px) {
-    --main-image-width: 118rem;
+    --main-image-width: 177rem;
   }
 
   @media (max-width: 992px) {
-    --main-image-width: 122rem;
+    --main-image-width: 183rem;
   }
 
   @media (max-width: 768px) {
-    --main-image-width: 128rem;
+    --main-image-width: 192rem;
     bottom: -0.4rem;
   }
 

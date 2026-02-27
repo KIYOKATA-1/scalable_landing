@@ -53,10 +53,10 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white">
       <Header />
       <main>
-        <section id="hero" className="relative overflow-hidden">
-          <div className="relative mx-auto flex min-h-[clamp(42rem,96vh,58rem)] max-[640px]:min-h-[72vh] max-[480px]:min-h-[68vh] w-full max-w-[1320px] items-start justify-center px-4 sm:px-6 lg:px-10">
+        <section id="hero" className="relative min-h-[95svh] overflow-hidden">
+          <div className="relative mx-auto flex min-h-[95svh] w-full max-w-[1320px] items-start justify-center px-4 sm:px-6 lg:px-10">
             <motion.section
-              className="relative z-10 flex w-full max-w-[1280px] flex-col items-center pt-[clamp(5.8rem,15.5vh,11rem)] text-center"
+              className="relative z-10 flex w-full max-w-[1280px] flex-col items-center pt-[clamp(5.8rem,15.5vh,11rem)] text-center lg:-translate-x-2 xl:-translate-x-3"
               initial="hidden"
               animate="visible"
               variants={heroContainerVariants}

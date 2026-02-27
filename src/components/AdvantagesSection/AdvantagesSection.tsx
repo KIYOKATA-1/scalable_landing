@@ -158,7 +158,7 @@ export function AdvantagesSection() {
   return (
     <motion.section
       id="advantages"
-      className="relative scroll-mt-24 border-t border-white/10 bg-[radial-gradient(1200px_420px_at_50%_-8%,rgba(93,110,243,0.26),rgba(0,0,0,0))]"
+      className="relative flex min-h-[100svh] items-center scroll-mt-24 border-t border-white/10 bg-[radial-gradient(1200px_420px_at_50%_-8%,rgba(93,110,243,0.26),rgba(0,0,0,0))]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.24 }}

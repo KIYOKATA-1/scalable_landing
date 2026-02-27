@@ -41,7 +41,7 @@ export function Header() {
 
   return (
     <header className="relative z-30 w-full">
-      <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-2 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-0 min-[769px]:pt-[2.65rem] lg:max-w-[1420px] lg:px-10 xl:max-w-[1500px] xl:px-12">
+      <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-2 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-0 min-[769px]:pt-[2.65rem] lg:max-w-[1420px] lg:-translate-x-4 lg:px-10 xl:max-w-[1500px] xl:-translate-x-8 xl:px-16">
         <motion.a
           href="#hero"
           className={desktopBrandClass}

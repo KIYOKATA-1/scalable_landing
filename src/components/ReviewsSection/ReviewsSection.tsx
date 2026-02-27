@@ -116,7 +116,7 @@ export function ReviewsSection() {
   return (
     <motion.section
       id="reviews"
-      className="relative scroll-mt-24 border-t border-white/10 bg-[radial-gradient(1000px_380px_at_50%_-6%,rgba(252,79,246,0.2),rgba(0,0,0,0))]"
+      className="relative flex min-h-[100svh] items-center scroll-mt-24 border-t border-white/10 bg-[radial-gradient(1000px_380px_at_50%_-6%,rgba(252,79,246,0.2),rgba(0,0,0,0))]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.24 }}
