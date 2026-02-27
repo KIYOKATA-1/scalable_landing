@@ -1,0 +1,107 @@
+.visualBlock {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+}
+
+.backgroundSpheres {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: visible;
+  --sphere-size-scale: 2;
+
+  --sphere-left-x: 27%;
+  --sphere-center-x: 50%;
+  --sphere-right-x: 73%;
+
+  --sphere-left-y: 96%;
+  --sphere-center-y: 90%;
+  --sphere-right-y: 96%;
+
+  --sphere-left-w: clamp(24rem, 48vw, 40rem);
+  --sphere-left-h: clamp(22rem, 44vw, 37rem);
+
+  --sphere-center-w: clamp(27rem, 56vw, 46rem);
+  --sphere-center-h: clamp(25rem, 52vw, 43rem);
+
+  --sphere-right-w: clamp(24rem, 48vw, 40rem);
+  --sphere-right-h: clamp(22rem, 44vw, 37rem);
+
+  @media (max-width: 768px) {
+    --sphere-left-x: 19%;
+    --sphere-right-x: 81%;
+    --sphere-left-y: 98%;
+    --sphere-center-y: 94%;
+    --sphere-right-y: 98%;
+
+    --sphere-left-w: clamp(16rem, 54vw, 24rem);
+    --sphere-left-h: clamp(14.5rem, 49vw, 22rem);
+
+    --sphere-center-w: clamp(18rem, 62vw, 28rem);
+    --sphere-center-h: clamp(16.5rem, 57vw, 25rem);
+
+    --sphere-right-w: clamp(16rem, 54vw, 24rem);
+    --sphere-right-h: clamp(14.5rem, 49vw, 22rem);
+  }
+}
+
+.mainImage {
+  --main-image-width: 114.67rem;
+  position: absolute;
+  left: 51%;
+  bottom: -2rem;
+  z-index: 1;
+  width: var(--main-image-width);
+  height: auto;
+  transform: translateX(-50%);
+
+  @media (max-width: 1200px) {
+    --main-image-width: 92rem;
+  }
+
+  @media (max-width: 992px) {
+    --main-image-width: 74rem;
+  }
+
+  @media (max-width: 768px) {
+    --main-image-width: 58rem;
+    bottom: -1.75rem;
+  }
+
+  @media (max-width: 480px) {
+    --main-image-width: 46rem;
+    bottom: -1.25rem;
+  }
+}
+
+.sphere {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.left {
+  left: var(--sphere-left-x);
+  top: var(--sphere-left-y);
+  width: calc(var(--sphere-left-w) * var(--sphere-size-scale));
+  height: calc(var(--sphere-left-h) * var(--sphere-size-scale));
+  opacity: 0.9;
+}
+
+.center {
+  left: var(--sphere-center-x);
+  top: var(--sphere-center-y);
+  width: calc(var(--sphere-center-w) * var(--sphere-size-scale));
+  height: calc(var(--sphere-center-h) * var(--sphere-size-scale));
+  opacity: 0.95;
+}
+
+.right {
+  left: var(--sphere-right-x);
+  top: var(--sphere-right-y);
+  width: calc(var(--sphere-right-w) * var(--sphere-size-scale));
+  height: calc(var(--sphere-right-h) * var(--sphere-size-scale));
+  opacity: 0.9;
+}

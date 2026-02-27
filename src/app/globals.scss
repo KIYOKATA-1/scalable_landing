@@ -1,0 +1,72 @@
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: rgba(0, 0, 0, 1);
+  color: #ffffff;
+}
+
+.hero-gradient-border-button {
+  --hero-angle: 0deg;
+  background:
+    linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)) padding-box,
+    linear-gradient(90deg, #ffffff 0%, #ffffff 100%) border-box;
+
+  &--active {
+    background:
+      linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)) padding-box,
+      linear-gradient(
+        90deg,
+        #ff3bff 0%,
+        #ecbfbf 38.02%,
+        #5c24ff 75.83%,
+        #d94fd5 100%
+      ) border-box;
+  }
+
+  &:hover {
+    background:
+      linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)) padding-box,
+      conic-gradient(
+        from var(--hero-angle),
+        #ff3bff,
+        #ecbfbf,
+        #5c24ff,
+        #d94fd5,
+        #ff3bff
+      ) border-box;
+    animation: hero-border-spin 1.4s linear infinite;
+  }
+}
+
+@property --hero-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes hero-border-spin {
+  to {
+    --hero-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-gradient-border-button {
+    &:hover {
+      animation: none;
+    }
+  }
+}

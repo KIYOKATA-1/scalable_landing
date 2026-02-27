@@ -25,20 +25,20 @@ const socialLinks = [
 ] as const;
 
 const desktopBrandClass =
-  "justify-self-start text-[clamp(0.75rem,0.67rem+0.35vw,0.95rem)] font-semibold tracking-[0.14em] text-white sm:tracking-[0.18em] min-[769px]:text-[clamp(1rem,0.72rem+0.75vw,2rem)] min-[769px]:tracking-[0.2em]";
+  "justify-self-start text-[clamp(0.75rem,0.67rem+0.35vw,0.95rem)] font-semibold tracking-[0.14em] text-white sm:tracking-[0.18em] min-[769px]:text-[clamp(1.05rem,0.92rem+0.5vw,2.05rem)] min-[769px]:tracking-[0.2em]";
 
 const desktopNavListClass =
-  "flex items-center gap-[clamp(1rem,0.4rem+1.25vw,2.75rem)] text-[clamp(0.8rem,0.7rem+0.25vw,1.15rem)] font-medium text-white/85";
+  "flex items-center gap-[clamp(1rem,0.65rem+0.85vw,2.25rem)] text-[clamp(0.72rem,0.65rem+0.18vw,1rem)] font-medium text-white/85";
 
 const socialIconClass =
-  "h-[clamp(0.9rem,0.76rem+0.36vw,1.45rem)] w-[clamp(0.9rem,0.76rem+0.36vw,1.45rem)]";
+  "h-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)] w-[clamp(0.92rem,0.84rem+0.26vw,1.1rem)]";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="w-full">
-      <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-3 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-2 min-[769px]:pt-8 lg:max-w-[1440px] lg:px-10 xl:max-w-[1600px] xl:px-14 2xl:max-w-[1760px] 2xl:px-20">
+    <header className="relative z-30 w-full">
+      <div className="mx-auto grid w-full max-w-[1240px] grid-cols-[1fr_auto] items-center gap-3 px-4 pb-2 pt-6 sm:px-6 min-[769px]:grid-cols-[1fr_auto_1fr] min-[769px]:px-8 min-[769px]:pb-0 min-[769px]:pt-[2.65rem] lg:max-w-[1420px] lg:px-10 xl:max-w-[1500px] xl:px-12">
         <a href="#" className={desktopBrandClass}>
           SITE NAME
         </a>
@@ -90,23 +90,29 @@ export function Header() {
       <nav
         id="mobile-navigation"
         aria-label="Mobile navigation"
-        className={`overflow-hidden transition-all duration-300 min-[769px]:hidden ${
-          isMenuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
-        }`}
+        className="absolute left-0 right-0 top-full z-40 min-[769px]:hidden"
       >
-        <ul className="mx-4 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-white/85 sm:mx-6">
-          {navItems.map((item) => (
-            <li key={item} className="border-b border-white/10 last:border-b-0">
-              <a
-                href="#"
-                className="block py-3 transition-colors duration-200 hover:text-white"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div
+          className={`mx-auto w-full max-w-[1240px] px-4 transition-all duration-300 sm:px-6 min-[769px]:px-8 lg:max-w-[1420px] lg:px-10 xl:max-w-[1500px] xl:px-12 ${
+            isMenuOpen
+              ? "pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none -translate-y-2 opacity-0"
+          }`}
+        >
+          <ul className="rounded-2xl border border-white/10 bg-black/95 px-4 py-3 text-sm font-medium text-white/85 backdrop-blur">
+            {navItems.map((item) => (
+              <li key={item} className="border-b border-white/10 last:border-b-0">
+                <a
+                  href="#"
+                  className="block py-3 transition-colors duration-200 hover:text-white"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </header>
   );
